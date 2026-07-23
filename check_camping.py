@@ -44,15 +44,17 @@ DATE_RANGES = [
     }
 ]
 
-# Camis Availability Status Code Mapping:
-# 6: No Availability
-# 7 or others: Available / Partially Available
+# Camis Availability Status Code Mapping for Ontario Parks UI:
+# 6: No Availability for Selected Booking Category
+# 7: Partially Available
+# 8: Available
 def get_status_text(status_codes):
     if not status_codes:
         return "Unknown"
-    # If any code in the status list is not 6, there is availability or partial availability
-    if any(code in (7, 8, 4, 5) for code in status_codes):
-        return "Available / Partially Available"
+    if 8 in status_codes:
+        return "Available"
+    elif 7 in status_codes:
+        return "Partially Available"
     elif all(code == 6 for code in status_codes):
         return "No Availability"
     else:
