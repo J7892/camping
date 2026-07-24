@@ -132,8 +132,8 @@ def check_ontario_parks():
                 target_mark = "[MONITORED]" if is_target else "           "
                 print(f"  {target_mark} {region_name:30s}: {status_text} (raw: {status_list})")
 
-                # Target region & has availability (status 7 or 8)
-                if is_target and any(code in (7, 8) for code in status_list):
+                # Target region & has availability (status 8)
+                if is_target and 8 in status_list:
                     findings.append({
                         "system": "Ontario Parks",
                         "date_label": label,
@@ -186,7 +186,7 @@ def check_parks_canada():
 
                     print(f"  [MONITORED] {loc_name:30s}: {status_text} (raw: {status_list})")
 
-                    if any(code in (7, 8) for code in status_list):
+                    if 8 in status_list:
                         findings.append({
                             "system": "Parks Canada",
                             "date_label": label,
